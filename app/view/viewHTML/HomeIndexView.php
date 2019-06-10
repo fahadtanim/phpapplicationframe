@@ -37,17 +37,39 @@
         <li><a href="collapsible.html">pricing plan</a></li>
         <li><a href="mobile.html">about & contact</a></li>
     </ul>
+    <div class="row">
+        <div class="col s12">
+            <ul class="tabs">
+                <li class="tab col s3"><a href="#test1">Home Slider</a></li>
+                <li class="tab col s3"><a class="active" href="#test2">Home About</a></li>
+                <li class="tab col s3"><a href="#test3">Home Testimonial</a></li>
+                <li class="tab col s3"><a href="#test4">Footer</a></li>
+            </ul>
+        </div>
+        <div id="test1" class="col s12"></div>
+        <div id="test2" class="col s12">Test 2</div>
+        <div id="test3" class="col s12">Test 3</div>
+        <div id="test4" class="col s12">Test 4</div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
+        /*
         document.addEventListener('DOMContentLoaded', function() {
             var elems = document.querySelectorAll('.sidenav');
             var instances = M.Sidenav.init(elems, options);
-        });
+        });*/
 
         // Or with jQuery
 
         $(document).ready(function() {
             $('.sidenav').sidenav();
+        });
+
+        // Or with jQuery
+
+        $(document).ready(function() {
+            $('.tabs').tabs();
         });
     </script>
 
