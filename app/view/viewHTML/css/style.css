@@ -250,3 +250,13 @@ input[type=text]:placeholder {
     outline: none;
 }
 
+
+/*###################     HEADER      ##################*/
+
+.nav-wrapper{
+    background-color: #ff5252;
+}
+.brand-logo{
+    margin-left: 15px;
+    font-family: 'Poiret One', cursive;
+}
