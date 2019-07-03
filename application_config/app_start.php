@@ -17,6 +17,7 @@
         $route = new Router();
         $route->map('login','get','Login');
         $route->map('home','get','Home');
+        $route->map('api/upload','post','Upload','upload_photo');
        // $route->map('','Task');
         $route->map('api/tasks/[:id]/[:num]','get','Task','edit');
         //$route->map('api/task','Task');

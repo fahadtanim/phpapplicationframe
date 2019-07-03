@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap" rel="stylesheet">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css" />
+
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- Compiled and minified JavaScript -->
@@ -40,18 +43,24 @@
     <div class="row">
         <div class="col s12">
             <ul class="tabs">
-                <li class="tab col s3"><a href="#test1">Home Slider</a></li>
-                <li class="tab col s3"><a class="active" href="#test2">Home About</a></li>
+                <li class="tab col s3"><a class="active" href="#test1">Home Slider</a></li>
+                <li class="tab col s3"><a href="#test2">Home About</a></li>
                 <li class="tab col s3"><a href="#test3">Home Testimonial</a></li>
                 <li class="tab col s3"><a href="#test4">Footer</a></li>
             </ul>
         </div>
-        <div id="test1" class="col s12"></div>
-        <div id="test2" class="col s12">Test 2</div>
-        <div id="test3" class="col s12">Test 3</div>
-        <div id="test4" class="col s12">Test 4</div>
+        <div id="test1" class="col s12">
+            <h6>Upload Images for Slider of home</h6>
+            <form action="./api/upload" method="post" enctype="multipart/form-data">
+                Select image to upload:
+                <input type="file" name="fileToUpload" id="fileToUpload">
+                <input type="submit" value="Upload Image" name="submit">
+            </form>
+        </div>
+        <div id="test2" class="col s12">Home About</div>
+        <div id="test3" class="col s12">Home Testimonial</div>
+        <div id="test4" class="col s12">footer</div>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
         /*
@@ -76,3 +85,8 @@
 </body>
 
 </html>
+
+
+<?php
+    
+?>

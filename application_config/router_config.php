@@ -101,24 +101,47 @@
                             if( file_exists(CONTROLLER_PATH.$controller_name.'.php') ){
                                 require_once(CONTROLLER_PATH.$controller_name.'.php');
                                 $view_name = $controller_name.'View';
-                                require_once(VIEW_PATH.$view_name.'.php');
-                                if( class_exists($controller_name) ){
-                                    $view =  new $view_name();
-                                    $controller = new $controller_name($view);
-                                    if(empty($action)){
-                                        $action = 'index';
-                                        $controller->$action();
-                                    }
-                                    elseif(method_exists($controller, $action)){
-                                        if(count($params) > 0){
-                                            call_user_func_array(array($controller, $action), $params);
-                                        }
-                                        else{
+                                if( file_exists(VIEW_PATH.$view_name.'.php')){
+                                    require_once(VIEW_PATH.$view_name.'.php');
+                                    if( class_exists($controller_name) ){
+                                        $view =  new $view_name();
+                                        $controller = new $controller_name($view);
+                                        if(empty($action)){
+                                            $action = 'index';
                                             $controller->$action();
                                         }
+                                        elseif(method_exists($controller, $action)){
+                                            if(count($params) > 0){
+                                                call_user_func_array(array($controller, $action), $params);
+                                            }
+                                            else{
+                                                $controller->$action();
+                                            }
+                                        }
+                                        else{
+                                            // echo "action couldn't be found";
+                                        }
                                     }
-                                    else{
-                                        // echo "action couldn't be found";
+                                }
+                                else{
+                                    if( class_exists($controller_name) ){
+                                        // $view =  new $view_name();
+                                        $controller = new $controller_name();
+                                        if(empty($action)){
+                                            $action = 'index';
+                                            $controller->$action();
+                                        }
+                                        elseif(method_exists($controller, $action)){
+                                            if(count($params) > 0){
+                                                call_user_func_array(array($controller, $action), $params);
+                                            }
+                                            else{
+                                                $controller->$action();
+                                            }
+                                        }
+                                        else{
+                                            // echo "action couldn't be found";
+                                        }
                                     }
                                 }
                             }
