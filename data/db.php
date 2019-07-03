@@ -2,21 +2,25 @@
     class DBConnect{
         private static $instance = null;
         private $connection;
-        private $server_name;
-        private $user_name;
-        private $password;
-        private $database_name;
+        private static $server_name;
+        private static $user_name;
+        private static $password;
+        private static $database_name;
 
         private function __construct( ){
-            $this->connection = mysqli_connect( $this->server_name, $this->user_name, $this->password, $this->database_name );
+            $this->connection = mysqli_connect( DBConnect::$server_name, DBConnect::$user_name, DBConnect::$password, DBConnect::$database_name );
         }
 
-        private static function get_DB_connect(){
-            if($this->instance == null){
-                $this->instance = new DBConnect();
+        public static function get_DB_connect($server_name,$user_name,$password,$database_name){
+            if(DBConnect::$instance == null){
+                DBConnect::$server_name = $server_name;
+                DBConnect::$user_name = $user_name;
+                DBConnect::$password = $password;
+                DBConnect::$database_name = $database_name;
+                DBConnect::$instance = new DBConnect();
             }
 
-            return $this->instance;
+            return DBConnect::$instance;
         }
 
         public function get_connection(){
@@ -39,7 +43,7 @@
             $querry{strlen($querry) - 1} = ")";
             
             
-            $result = mysqli_query( $this->connection, $querry );
+            $result = mysqli_query( $this->get_connection(), $querry );
             return $result;
         }
 
@@ -48,9 +52,12 @@
             $querry = "SELECT * FROM ".$tableName;
             if( $condition )
                 $querry = $querry . " WHERE ".$condition;
-            //print_r($querry);
+            // print_r($querry);
             
-            $result = mysqli_query( $this->connection, $querry);
+            $result = mysqli_query( $this->get_connection(), $querry);
+            // echo "<br>";
+            // var_dump($result);
+            // print_r($result);
             if( !$result )
                 return false;
             $table = array();
