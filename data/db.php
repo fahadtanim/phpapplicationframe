@@ -70,9 +70,7 @@
         function getTableDataObj( $tableName, $condition = false ){
             $querry = "SELECT * FROM ".$tableName;
             if( $condition )
-                $querry = $querry . " where ".$condition;
-            //print_r($querry);
-            
+                $querry = $querry . " WHERE ".$condition;
             $result = mysqli_query( $this->connection, $querry);
             if( !$result )
                 return false;

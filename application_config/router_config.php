@@ -11,11 +11,10 @@
             $this->urlLen = count($this->url_array);
             //print_r($this->url_array);
         }
-
         public function map($routeUrl, $method_name, $controller_name, $action_name=''){
             $method_name = ( empty($method_name) ) ? 'get' : strtolower($method_name);
             if($routeUrl == '**'){
-                $this->route_map[$routeUrl] = array(
+                $this->route_map[$method_name][$routeUrl] = array(
                     'controller' => $controller_name,
                     'action' => $action_name,
                     'method' => $method_name
@@ -23,7 +22,7 @@
             }
             elseif (empty($routeUrl)) {
                 $routeUrl = 'index';
-                $this->route_map[$routeUrl] = array(
+                $this->route_map[$method_name][$routeUrl] = array(
                     'controller' => $controller_name,
                     'action' => $action_name,
                     'method' => $method_name
@@ -35,25 +34,24 @@
     
                 $reg = '/^'.preg_replace('/\//', '\/', $reg).'$/';
     
-                $this->route_map[$reg] = array(
+                $this->route_map[$method_name][$reg] = array(
                     'controller' => $controller_name,
                     'action' => $action_name,
                     'method' => $method_name
                 );
             }
         }
-
         public function route_start(){
-            // echo "URL: ".$this->url."<br>";
             $controller_found = false;
+            $method_name = strtolower($_SERVER["REQUEST_METHOD"]);
             if ($this->url == 'index') {
-                if(strtolower($_SERVER["REQUEST_METHOD"]) == $this->route_map['index']['method'] ){
-                    $controller_name = $this->route_map['index']['controller'].'Controller';
-                    if($this->route_map['index']['action'] == '*'  ){
-                        $action = $this->route_map['index']['action'];
+                if($this->route_map[$method_name]['index'] ){
+                    $controller_name = $this->route_map[$method_name]['index']['controller'].'Controller';
+                    if($this->route_map[$method_name]['index']['action'] == '*'  ){
+                        $action = $this->route_map[$method_name]['index']['action'];
                     }
                     else{
-                        $action = $this->route_map['index']['method'].'_'.$this->route_map['index']['action'];
+                        $action = $method_name.'_'.$this->route_map[$method_name]['index']['action'];
                     }
                     if( file_exists(CONTROLLER_PATH.$controller_name.'.php') ){
                         require_once(CONTROLLER_PATH.$controller_name.'.php');
@@ -75,7 +73,7 @@
                 }
             }
             else {
-                foreach( $this->route_map as $route_key => $route_values ){
+                foreach( $this->route_map[$method_name] as $route_key => $route_values ){
                     if ($route_key == 'index') {
                         continue;
                     }
@@ -151,7 +149,6 @@
                     }
                 }
             }
-
             if($controller_found == false){
                 $controller_name = $this->route_map['**']['controller'].'Controller';
                 if($this->route_map['**']['method'] == '*'){

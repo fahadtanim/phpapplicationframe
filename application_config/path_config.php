@@ -1,5 +1,6 @@
 <?php 
     define('CONTROLLER_PATH',ROOT."/app/controller/");
+    define('APPLICATION_SERVICES_PATH',ROOT."/app/application_services/");
     define('MODEL_PATH',ROOT."/app/model/");
     define('ENTITY_MODEL_PATH',ROOT."/app/model/entity/");
     define('VIEW_PATH',ROOT."/app/view/");

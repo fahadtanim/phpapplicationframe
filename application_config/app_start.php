@@ -19,6 +19,8 @@
         $route->map('home','get','Home');
         $route->map('api/upload','post','Upload','upload_photo');
         $route->map('api/users','get','User','users');
+        $route->map('api/users','post','User','user');
+        $route->map('api/users/[:id]','get','User','user_by_id');
        // $route->map('','Task');
         $route->map('api/tasks/[:id]/[:num]','get','Task','edit');
         //$route->map('api/task','Task');
