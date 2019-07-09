@@ -23,6 +23,8 @@ function app_start()
     $route->map('api/users', 'post', 'User', 'user');
     $route->map('api/users/[:id]', 'get', 'User', 'user_by_id');
     $route->map('api/home/banners', 'get', 'HomeBanner', 'home_banners');
+    $route->map('api/home/about', 'get', 'HomeAbout', 'home_about');
+    $route->map('api/home/about/update', 'post', 'HomeAbout', 'home_about_update');
     // $route->map('','Task');
     $route->map('api/tasks/[:id]/[:num]', 'get', 'Task', 'edit');
     //$route->map('api/task','Task');
